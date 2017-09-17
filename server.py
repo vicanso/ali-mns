@@ -43,7 +43,7 @@ def ping():
 def sms(phone):
   data = request.get_json()
   if request.headers.get('Token') != 'OKNtCOuvRd':
-    raise InvalidUsage('toke is invalid')
+    raise InvalidUsage('token is invalid')
 
   # 初始化短信发送的相关配置信息
   smsAttr = DirectSMSInfo(free_sign_name=data.get('sign'), template_code=data.get('template'), single=False)
