@@ -7,6 +7,7 @@ from mns.topic import DirectSMSInfo, TopicMessage, MNSExceptionBase
 app = Flask(__name__)
 account = Account(os.getenv('END_POINT'), os.getenv('ACCESS_ID'), os.getenv('ACCESS_KEY'))
 topic = account.get_topic(os.getenv('TOPIC'))
+accessToken = os.getenv('ACCESS_TOKEN')
 
 class InvalidUsage(Exception):
   status_code = 400
@@ -42,7 +43,7 @@ def ping():
 @app.route('/sms/<phone>', methods=['POST'])
 def sms(phone):
   data = request.get_json()
-  if request.headers.get('Token') != 'OKNtCOuvRd':
+  if request.headers.get('Token') != accessToken:
     raise InvalidUsage('token is invalid')
 
   # 初始化短信发送的相关配置信息
