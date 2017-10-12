@@ -43,7 +43,7 @@ def ping():
 @app.route('/sms/<phone>', methods=['POST'])
 def sms(phone):
   data = request.get_json()
-  if request.headers.get('Token') != accessToken:
+  if request.headers.get('X-Token') != accessToken:
     raise InvalidUsage('token is invalid')
 
   # 初始化短信发送的相关配置信息
